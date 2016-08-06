@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Employee Application</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="css/employee.css" />
+<link rel="stylesheet" type="text/css" href="css/app.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+</head>
+
+<body>
+	<div class="generic-container" ng-app="employeeApp"
+		ng-controller="employeeController as empCtrl">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="lead">Employee Registration Form </span>
+			</div>
+			<div class="formcontainer">
+				<form name="myForm" class="form-horizontal">
+					<input type="hidden" ng-model="ctrl.employee.name" />
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="col-md-2 control-lable" for="file">Employee Name</label>
+							<div class="col-md-7">
+								<input type="text" ng-model="empCtrl.employee.name" name="ename" class="username form-control input-sm" 
+										placeholder="Enter your Ename" required ng-minlength="3" />
+								<div class="has-error" ng-show="myForm.$dirty">
+									<span ng-show="myForm.ename.$error.required">This is a required field</span> 
+									<span ng-show="myForm.ename.$error.minlength">Minimum length required is 3</span> 
+									<span ng-show="myForm.ename.$invalid">This field is invalid </span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="col-md-2 control-lable" for="file">Designation</label>
+							<div class="col-md-7">
+								<input type="text" ng-model="empCtrl.employee.desg" class="form-control input-sm" placeholder="Enter Designation" />
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-actions floatRight">
+							<button type="button" ng-click="empCtrl.submit('create')" class="btn btn-warning btn-sm" ng-disabled="myForm.$invalid">Submit</button>
+							<button type="button" ng-click="empCtrl.reset('reset')" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<!-- Default panel contents -->
+			<div class="panel-heading">
+				<span class="lead">Employee List</span>
+			</div>
+			<div class="tablecontainer">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Employee Id</th>
+							<th>Employee Name</th>
+							<th>Employee Desg</th>
+							<th width="20%"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="employee in empCtrl.employees">
+							<td><span ng-bind="employee.id"></span></td>
+							<td><span ng-bind="employee.name"></span></td>
+							<td><span ng-bind="employee.desg"></span></td>
+							<td>
+								<button type="button" ng-click="empCtrl.edit(employee.id)" class="btn btn-success custom-width">Edit</button> 
+                            	<button type="button" ng-click="empCtrl.remove(employee.id)" class="btn btn-danger btn-sm">Remove</button>
+                            </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<script src="app/vendor/jquery.min.js"></script>
+	<script src="app/vendor/angular/angular.min.js"></script>
+	<script src="app/vendor/angular/angular-sanitize.min.js"></script>
+	<script src="app/vendor/angular/angular-cookies.min.js"></script>
+	<script src="app/vendor/angular/angular-animate.min.js"></script>
+	<script src="app/vendor/angular/angular-resource.min.js"></script>
+	<script src="app/vendor/angular/angular-ui-router.min.js"></script>
+	<script src="app/vendor/ui-bootstrap-tpls-2.0.0.min.js"></script>
+	<script src="app/vendor/angular/angular-mocks.js"></script>
+	<script src="app/vendor/bootstrap.min.js"></script>
+
+	<script src="app/app.js"></script>
+	<script src="app/employee.controller.js"></script>
+	<script src="app/employee.service.js"></script>
+
+
+
+</body>
+</html>
